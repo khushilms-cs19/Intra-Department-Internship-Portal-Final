@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+    <script type="text/javascript">
+      function validate() {
+        var usnValidate = LoginPage.usn.value.search(/1BM1[6-9]CS[0-9]{3}/i);
+        if (usnValidate == -1) {
+          alert("Please Enter a Valid USN.");
+          document.LoginPage.usn.focus();
+          return false;
+        }
+
+        var emailValidate = LoginPage.emailid.value.search(
+          /[a-zA-Z].cs1[6-9]@bmsce.ac.in/
+        );
+        if (emailValidate == -1) {
+          alert("Please Enter a valid email id.");
+          document.LoginPage.emailid.focus();
+          return false;
+        }
+
+        var passwordValidate = LoginPage.password.value;
+        if (passwordValidate == "") {
+          alert("Please enter your password");
+          document.LoginPage.password.focus();
+          return false;
+        }
+      }
+    </script>
+    <style>
+      .studentlogin {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #99ccff;
+        margin: 2rem auto;
+        width: 300px;
+        height: auto;
+        padding: 20px;
+        border-radius: 20px;
+        gap: 0.4rem;
+      }
+      .textbox {
+        border-radius: 20px;
+        width: 230px;
+        height: 40px;
+        padding-left: 20px;
+        border: 0px;
+      }
+      .loginbutton {
+        background-color: #3399ff;
+        padding: 8px;
+        color: black;
+        text-align: center;
+        border-radius: 18px;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 20px;
+        width: 100px;
+      }
+      .loginbutton:hover {
+        background-color: #0080ff;
+      }
+
+      #errorBox{
+        color: red;
+        text-align: center;
+        display: none;
+      }
+    </style>
+    <link rel="stylesheet" href="/JS/navbar.css" />
+    <script src="/JS/navbar.js"></script>
+  </head>
+  <body style="background-color: #cce6ff">
+    <div class="top" style="background-color: #3399ff">
+      <a href="https://www.bmsce.ac.in/"
+        ><img src="/Images/bmscelogo2.png" id="bmslogo"
+      /></a>
+      <h1 style="text-align: center">B.M.S College of Engineering</h1>
+      <h1 style="text-align: center">Student Login</h1>
+    </div>
+    <div id="nav-tag"></div>
+    <form
+      name="LoginPage"
+      class="studentlogin"
+    >
+      <img
+        src="/Images/userlogo.jpg"
+        style="width: 100px; height: 100px;"
+      />
+      <br />
+      <input class="textbox" type="text" name="usn" id="usn" placeholder="Your USN" />
+      <br />
+      <input
+        class="textbox"
+        type="text"
+        name="emailid"
+        id="email"
+        placeholder="NameDeptYear@bmsce.ac.in"
+      />
+      <br />
+      <input
+        class="textbox"
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password"
+      />
+      <button class="loginbutton" name="submit" type="button" id="submit">Login</button>
+      
+    </form>
+    <p id="errorBox"></p>
+    <script type="text/javascript">
+      var email = document.getElementById('email')
+      var password = document.getElementById('password')
+      var usn = document.getElementById('usn')
+
+      var headers = new Headers()
+      headers.append('Content-Type', 'application/json')
+
+      document.getElementById('submit').addEventListener('click', (e) => {
+        e.preventDefault()
+        fetch('http://localhost:3000/student-login',{
+          method: 'POST',
+          headers,
+          credentials: 'include',
+          body: JSON.stringify({
+            usn: usn.value,
+            email: email.value,
+            password: password.value 
+          })
+        }).then(async (res) => {
+          newRes = await res.json()
+          console.log(newRes.errors)
+          if(newRes.status){
+            window.location = newRes.redirect //student-dash
+          }else{
+            var errorValue = document.getElementById('errorBox')
+            errorValue.innerHTML = newRes.errors[0].msg
+            errorValue.style.display = 'block'
+            setTimeout(() => {
+              errorValue.style.display = 'none'
+            },2000)
+            
+          }
+          
+        }).catch(e => console.log(e))
+      })
+    </script>
+  </body>
+</html>
+

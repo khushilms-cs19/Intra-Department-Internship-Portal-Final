@@ -1,0 +1,62 @@
+*{
+    outline: 0;
+}
+
+body{
+    background-color: #cce6ff;
+}
+
+.container{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: auto;
+    gap: 2rem;
+    padding-bottom: 5rem;
+}
+
+.link{
+    color:  rgb(0, 119, 255);
+    width: 12rem;
+    height: 4rem;
+    padding: 2rem;
+    background-color: rgb(248, 248, 248);
+    border: 2px solid rgb(0, 119, 255);
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.link:hover {
+    top: -20px;
+    color: white;
+    background-color:  #3399ff;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+link:visited{
+    color: inherit;
+}
+
+.registerUser{
+    color:  rgb(0, 119, 255);
+    width: 6rem;
+    height: 3rem;
+    padding: 2rem;
+    background-color: rgb(248, 248, 248);
+    border: 2px solid rgb(0, 119, 255);
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.sticky{
+    position: fixed;
+    top: 0;
+    width: 100%;
+}

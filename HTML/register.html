@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Register</title>
+    <script defer type="text/javascript">
+      function validate() {
+        var usnValidate = LoginPage.usn.value.search(/1BM1[6-9]CS[0-9]{3}/i);
+        if (usnValidate == -1) {
+          alert("Please Enter a Valid USN.");
+          document.LoginPage.usn.focus();
+          return false;
+        }
+
+        var emailValidate = LoginPage.emailid.value.search(
+          /[a-zA-Z].cs1[6-9]@bmsce.ac.in/
+        );
+        if (emailValidate == -1) {
+          alert("Please Enter a valid email id.");
+          document.LoginPage.emailid.focus();
+          return false;
+        }
+
+        var passwordValidate = LoginPage.password.value;
+        if (passwordValidate == "") {
+          alert("Please enter your password");
+          document.LoginPage.password.focus();
+          return false;
+        }
+      }
+      var loadFile = function(e) {
+            var image = document.querySelector('.registerUserImg'); // getting image tag with id 'photo'
+            image.src = URL.createObjectURL(e.target.files[0]); // setting src of the image to the one selected by user
+            // e is an event object, e.target contains information of the submitted form, files[0] is the file selected by user
+        };
+    </script>
+    <style>
+      #roles{
+        transform: translateX(100%);
+        width: 100px;
+        height: 30px;
+        text-align: center;
+        border-radius: 15px;
+        border: none;
+      }
+      #profilepic{
+        width: 200px;
+        height: 40px;
+        transform: translateX(20%);
+      }
+      .registerUserImg{
+        width: 100px; 
+        height: 100px;
+        transform: translateX(100%);
+        border-radius: 50%;
+        box-shadow: 0 0 10px 5px #4ea4fa;
+
+      }
+      .studentlogin {
+        background-color: #99ccff;
+        margin-left: 40%;
+        margin-right: 30%;
+        margin-top: 5%;
+        width: 300px;
+        height: 70%;
+        padding: 20px;
+        border-radius: 20px;
+        justify-content: center;
+        align-items: center;
+      }
+      .textbox {
+        margin-left: 25px;
+        margin-top: 20px;
+        border-radius: 20px;
+        width: 230px;
+        height: 40px;
+        padding-left: 20px;
+        border: 0px;
+      }
+      .loginbutton {
+        background-color: #3399ff;
+        padding: 8px;
+        color: black;
+        text-align: center;
+        border-radius: 18px;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 20px;
+        margin-left: 95px;
+        width: 100px;
+      }
+      .loginbutton:hover {
+        background-color: #0080ff;
+      }
+    </style>
+    <link rel="stylesheet" href="/JS/navbar.css" />
+    <script src="/JS/navbar.js"></script>
+  </head>
+  <body style="background-color: #cce6ff">
+    <div class="top" style="background-color: #3399ff">
+      <a href="https://www.bmsce.ac.in/"
+        ><img src="/Images/bmscelogo2.png" id="bmslogo"
+      /></a>
+      <h1 style="text-align: center">B.M.S College of Engineering</h1>
+      <h1 style="text-align: center">Register</h1>
+    </div>
+    <div id="nav-tag"></div>
+    <form
+      name="LoginPage"
+      class="studentlogin"
+    >
+      <img
+        class="registerUserImg"
+        src="/Images/userlogo.jpg"
+      />
+      <br />
+      <div>
+        <input type="file" name="profilepic" id="profilepic" onchange="loadFile(event)" style="" />
+        <!-- <input type="file" name="image" id="file" onchange="loadFile(event)" style="display: none;">  -->
+      </div>
+      <select name="roles" id="roles">
+        <option value="student">Student</option>
+        <option value="alumni">Alumni</option>
+        <option value="admin">Admin</option>
+      </select><br>
+      <input class="textbox" type="text" name="usn" id="usn" placeholder="Your USN" />
+      <br />
+      <input
+        class="textbox"
+        type="text"
+        name="emailid"
+        id="email"
+        placeholder="NameDeptYear@bmsce.ac.in"
+      />
+      <br />
+      <input
+        class="textbox"
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password"
+      />
+      <button class="loginbutton" name="submit" id="submit" type="button">Register</button>
+    </form>
+    <script>
+      var role = document.getElementById('roles')
+      var email = document.getElementById('email')
+      var password = document.getElementById('password')
+      var usn = document.getElementById('usn')
+      var profilepic = document.getElementById('profilepic')
+
+      document.getElementById('submit').addEventListener('click', (e) => {
+        e.preventDefault()
+        alert('FORM SUBMITTED')
+        sendData()
+      })
+
+
+      role.addEventListener('change', (e) => {
+        console.log(role.value)
+        if(role.value === 'student'){
+          usn.style.display = 'inline'   
+        }else{
+          usn.style.display = 'none'
+        }
+      })
+
+
+      const sendData = async () => {
+
+        let formData = new FormData()
+
+        if(role.value === 'student'){
+          formData.append('type', 'student')
+          formData.append('email', email.value)
+          formData.append('password', password.value)
+          formData.append('usn', usn.value)
+          formData.append('profilepic', profilepic.files[0])
+        }else if(role.value === 'alumni'){
+          formData.append('type', 'alumni')
+          formData.append('email', email.value)
+          formData.append('password', password.value)
+          formData.append('profilepic', profilepic.files[0])
+        }else{
+          formData.append('type', 'admin')
+          formData.append('email', email.value)
+          formData.append('password', password.value)
+          formData.append('profilepic', profilepic.files[0])
+        }
+
+        const headers = new Headers()
+        headers.append('Content-Type', 'application/json')
+
+        if(role.value === 'student'){
+          fetch('http://localhost:3000/register', {
+            method: 'POST',
+            body: formData,
+            //headers: headers
+          }).then(async (res) => {
+            var newRes = await res.json()
+            console.log(newRes)
+            if(newRes.status === 'success'){
+              window.location = newRes.redirect
+            }else{
+              alert(newRes.error)
+            }
+          })
+        }else if(role.value === 'alumni'){
+          fetch('http://localhost:3000/register', {
+            method: 'POST',
+            body: formData,
+            //headers: headers
+          }).then(async (res) => {
+            var newRes = await res.json()
+            console.log(newRes)
+            if(newRes.status === 'success'){
+              window.location = newRes.redirect
+            }else{
+              alert(newRes.error)
+            }
+          })
+        }else{
+          fetch('http://localhost:3000/register', {
+            method: 'POST',
+            body: formData,
+            //headers: headers
+          }).then(async (res) => {
+            var newRes = await res.json()
+            console.log(newRes)
+            if(newRes.status === 'success'){
+              window.location = newRes.redirect
+            }else{
+              alert(newRes.error)
+            }
+          })
+        }
+      }
+    </script>
+  </body>
+</html>

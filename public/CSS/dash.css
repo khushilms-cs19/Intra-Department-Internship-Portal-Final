@@ -1,0 +1,46 @@
+*{
+    outline: 0;
+}
+
+body{
+    background-color: rgb(187, 234, 248);
+    /* overflow-y: hidden; */
+}
+
+.menu{
+    background-color: #99ccff;
+    height: 72vh;
+    width: 20vw;
+    border-radius: 20px;
+    float: left;
+    margin-top: 10px; 
+    margin-right: 20px;
+    margin-left: 2px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.menu > p {
+    margin: 0;
+    font-size: 2em;
+    text-align: center;
+    background-color:  rgb(65, 151, 250);
+}
+
+.main{ 
+    background-color: #99ccff;
+    border-radius: 20px;
+    height: 72vh;
+    width: 77.5%;
+    float: left;
+    margin-top: 10px;
+    overflow: hidden;
+} 
+
+.main > p {
+    margin: 0;
+    font-size: 2em;
+    text-align: center;
+    background-color: rgb(65, 151, 250);
+}
+

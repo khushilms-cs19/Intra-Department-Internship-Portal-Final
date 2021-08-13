@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*
+{
+  margin: 0;
+  padding: 0;
+}
+body{
+  background-image:url("../Images/about_img.jpg");
+  background-size:cover;
+}
+.members
+{
+  overflow: hidden;
+  text-align:left;
+  padding:60px;
+}
+.members h1
+{
+  transform: translate(0px,-55px);
+  text-transform:uppercase;
+  margin-bottom: 60px;
+  color:#429bf5;
+  font-size: 40px;
+  font-family: 'Anton', sans-serif;
+  text-align: center;
+  letter-spacing: 1.5px;
+}
+
+.pictures{
+  margin-left: 12.5vw;
+}
+
+.pictures a
+{
+  display:inline-block;
+  margin:0px 68px;
+  width:160px;
+  height: 160px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.pictures a img
+{
+  width:100%;
+  filter:grayscale(100%);
+  transition:0.4s all;
+    transform: translate(0px,-2px);
+    background-size: cover;
+    height:100%;
+  
+}
+.pictures a:hover >img
+{
+  filter: none;
+
+}
+.section
+{
+  width: 600px;
+  margin: auto;
+  font-size: 20px;
+  color: white;
+  text-align: justify;
+  overflow: hidden;
+  height: 0;
+}
+
+#names{
+  margin-left: 12.5vw;
+}
+.name1
+{
+  display:inline-block;
+  margin-bottom: 0px;
+  transform: translate(78px,0px);
+  font-family: 'Anton', sans-serif;
+  text-transform: uppercase;
+  color: white;
+  font-weight: 200;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+.name2
+{
+  display:inline-block;
+  margin-bottom: 30px;
+  transform: translate(220px,0px);
+  text-transform: uppercase;
+  font-family: 'Anton', sans-serif;
+  color: white;
+  font-weight: 200;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+.name3
+{
+  display:inline-block;
+  margin-bottom: 30px;
+  transform: translate(380px,0px);
+  text-transform: uppercase;
+  color: white;
+  font-weight: 200;
+  font-family: 'Anton', sans-serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+.name4
+{
+  display:inline-block;
+  margin-bottom: 30px;
+  transform: translate(530px,0px);
+  text-transform: uppercase;
+  color: white;
+  font-family: 'Anton', sans-serif;
+  font-weight: 200;
+ font-size: 20px;
+letter-spacing: 1px;
+}
+
+#p_1
+{
+text-align: justify;
+  font-family: 'Anton', sans-serif;
+    transform: translate(160px,40px);
+    letter-spacing: 1.2px;
+    color:#500ccf;
+    font-size: 40px;
+    margin-left: 8vw;
+    text-shadow:0px 0px 50px blue;
+}
+#p_2
+{
+  font-family: 'Anton', sans-serif;
+  color:black;
+  font-weight: bold;
+  font-size:18px;
+  text-align: justify;
+  padding: 9px;
+
+}
+h3
+{
+  text-align: justify;
+  font-family: 'Anton', sans-serif;
+  transform: translate(160px,80px);
+  letter-spacing: 1.2px;
+  font-size: 20px;
+  margin-left: 12vw;
+  color:#500ccf;
+}
+.tag {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  margin-left: 11vw;
+  border:none;
+
+perspective: 1000px;
+}
+.tag-inner {
+
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  padding-bottom: 5px;
+}
+
+.tag:hover .tag-inner {
+  transform: rotateY(180deg);
+}
+
+.tag-front,.tag-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.tag-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.tag-back {
+  background-color: lightblue;
+  color: white;
+  transform: rotateY(180deg);
+}

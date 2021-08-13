@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/CSS/loginSelect.css" />
+    <link rel="stylesheet" href="/JS/navbar.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Select</title>
+    <script src="/JS/navbar.js"></script>
+  </head>
+  <body>
+    <div class="top" style="background-color: #3399ff">
+      <a href="https://www.bmsce.ac.in/"
+        ><img src="/Images/bmscelogo2.png" id="bmslogo"
+      /></a>
+      <h1 style="text-align: center"><b>B.M.S College of Engineering</b></h1>
+      <h1 style="text-align: center; font-size: 2rem;"><b>Login</b></h1>
+    </div>
+    <div id="nav-tag"></div>
+    <div class="container">
+      <a class="link" id="first" href="./student-login">Student Login</a>
+      <a class="link" id="second" href="./alumni-login">Alumni Login</a>
+      <a class="link" id="third" href="./admin-login">Admin Login</a>
+      <a class="link"id="fourth" href="./register">Register</a>
+    </div>
+    <script>
+      window.onscroll = function(){scrollFunc()}
+      
+      var nav = document.getElementById("nav-tag")
+      var sticky = nav.offsetTop
+
+      function scrollFunc(){
+        if (window.pageYOffset > sticky) {
+          nav.classList.add("sticky")
+        }else{
+          nav.classList.remove("sticky")
+        }
+      }
+    </script>
+  </body>
+</html>

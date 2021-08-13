@@ -1,0 +1,128 @@
+.photo {
+    height: 350px;
+    width: 350px;
+    /* overflow: scroll; */
+    background-color:rgb(248, 248, 248);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 40px;
+    margin-right: 0px;
+    margin-left: 65px;
+    float: left;
+    border-radius: 10px;
+}
+.userDetails{
+    float: right;
+    width: 300px;
+    height: 70px;
+    background-color: #cce6ff;
+    border-radius: 10px;
+    font-size: 13px;
+    text-align: left;
+    padding: 10px;
+    line-height: 2;
+    position:static;
+}
+.userImg{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    float: right;
+    margin: 0;
+    transform: translateY(10%);
+}
+.logoutButton{
+    height: 30px;
+    width: 80px;
+    color: #F0F8EF;
+    background-color: #3399ff;
+    border-radius: 50px;
+    /* transform: translate(70%,50%); */
+    border:3px solid #0073e6;
+
+}
+
+.form-container{
+    margin-top: 22.5px;
+    float: right;
+    height: 80%;
+    width: 50%;
+}
+
+
+form label{
+    display: block;
+}
+
+
+form input[type="text"] {
+    height: 5vh;
+    width: 400px;
+    outline: 0;
+    border-width: 0 0 2px;
+    border-radius: 10px;
+    border-color: black;
+}
+
+form input[type="text"]:focus {
+    
+    padding: 0 0 50px 0;
+    width: 450px;
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: rgb(26, 243, 26);
+}
+
+
+.form-container input[type="button"] {
+    height: 50px;
+    width: 400px;
+    border-radius: 10px;
+    border-color: black;
+    color: white;
+    background-color: black;
+    margin-top: 20px;
+    margin-left: 2.5px;
+    transition-duration: 0.4s;
+    font-size: 1em;
+}
+
+.form-container input[type="button"]:hover {
+    color:black;
+    border-color: rgb(62, 253, 4);
+    background-color:rgb(62, 253, 4);
+}
+.menu{
+    overflow: scroll;
+}
+.menu > ul{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    list-style: none;
+    /* overflow: scroll; */
+    text-align: center;
+    
+}
+
+.menu > ul > li{
+    margin-bottom: 1vh;
+    background-color: rgb(71, 126, 197);
+    font-size: 1.5em;
+    padding: 2vh;
+    border-radius: 10px;
+}
+
+#fileLabel{
+    position: relative;
+    padding: 10px;
+    top: -8.0vh;
+    right: 435px;
+    background-color: black;
+    border: 2px solid;
+    border-radius: 10px;
+    color: white;
+}
+
+#filelabel:hover {
+    transform: scale(1.1);
+}

@@ -1,0 +1,83 @@
+                <!-- <%if(offersList.appliedOfferIds.includes(offersList.offerIds[i])){%>
+                    <form>
+                        <button class="applybutton" style="background-color: lawngreen;"name="submit" type="submit" value="<%=offersList.offerIds[i]%>">Applied</button>
+                    </form>
+                <%}else{%>
+                    <form method="POST" action="/student-dash">
+                    <button class="applybutton" onclick="changestyle(this)" name="submit" type="submit" value="<%=offersList.offerIds[i]%>">Apply</button>
+                    </form>
+                <%}%> -->
+
+
+
+                
+    <!-- i tried the dynamic loading via ejs not working as of now so ignore the below -->
+    
+    <!-- <script type="text/javascript">
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawChart);
+        var stipendsdata= '<%= StipendData %>';
+        var fielddata= '<%= FieldOfWork %>';
+        alert(typeof fielddata)
+        button1 = document.getElementById("b1");
+        button2 = document.getElementById("b2");
+
+        button1.style.boxShadow =
+        "0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)";
+        var current = 0;
+        function setChart(num) {
+        switch (num) {
+            case 0: {
+            button2.style.boxShadow = "none";
+            button1.style.boxShadow =
+                "0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)";
+            break;
+            }
+            case 1: {
+            button1.style.boxShadow = "none";
+            button2.style.boxShadow =
+                "0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)";
+            break;
+            }
+            default: {
+            console.log("default");
+            }
+        }
+        current = num;
+        alert("before draw chart");
+        drawChart();
+        }
+
+        function drawChart() {
+        var data = [];
+        data[0] = google.visualization.arrayToDataTable(fielddata);
+
+        data[1] = google.visualization.arrayToDataTable(stipendsdata);
+        
+        var options = {
+            height: 500,
+            width: 750,
+            chartArea: {
+            height: "60%",
+            width: "60%",
+            },
+            legend: {
+            position: "top",
+            },
+            backgroundColor: {
+            fillOpacity: 0,
+            fill: "#00ccff",
+            },
+            animation: {
+            startup: true,
+            duration: 1000,
+            easing: "out",
+            },
+        };
+        var chart = new google.visualization.PieChart(
+            document.getElementById("chartContainer")
+        );
+        chart.draw(data[current], options);
+        }
+
+    </script> -->

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Student Dashboard</title>
+        <script type="text/javascript">
+        </script>
+        <style>
+            *{
+                font-family:"Arial";
+                font-weight: 700;
+                
+            }
+            body::-webkit-scrollbar{
+                display: hidden;
+                
+            }
+
+            .userDetails{
+                float: right;
+                width: 300px;
+                height: 70px;
+                background-color: #cce6ff;
+                border-radius: 10px;
+                font-size: 13px;
+                text-align: left;
+                padding: 10px;
+                line-height: 2;
+                position:static;
+            }
+            .userImg{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                float: right;
+                margin: 0;
+                transform: translateY(10%);
+            }
+            .logoutButton{
+                height: 30px;
+                width: 80px;
+                color: #F0F8EF;
+                background-color: #3399ff;
+                border-radius: 50px;
+                /* transform: translate(70%,50%); */
+                border:3px solid #0073e6;
+
+            }
+            .logoutform{
+                display: flex;
+                justify-content: center;
+                transform: translateY(-30%);
+            }
+            .logoutButton:hover{
+                background-color: #0073e6;
+            }
+
+            .FilterOption{
+                margin-top: 10px;
+                width: 250px;
+                height: 73vh;
+                float: left;
+                background-color: #99ccff;
+                border-radius: 20px;
+                margin-right: 2vw;
+                margin-left: 10px;
+            }
+            .filterhead{
+                width: 100%;
+                height: 30px;
+                border-radius: 20px;
+                background-color:#3399ff;
+                font-size: 25px;
+                margin: 0px;
+            }
+
+            .filterparam{
+                height: 30px;
+                width: 200px;
+                margin-left: 25px;
+                margin-right: 25px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                background-color: #e6f2ff;
+                border: 0px;
+                border-radius: 5px;
+                padding-left: 20px;
+            }
+            .refresh{
+                height: 40px;
+                width: 100px;
+                background-color: #3399ff;
+                border-radius: 50px;
+                border: 0px;
+                font-size: 18px;
+                margin-left: 30%;
+            }
+            .refresh:hover{
+                background-color: #0073e6;
+            }
+            .allofferdiv{
+                height: 75vh;
+                overflow-y: auto;
+                line-height: 1.4;
+                overflow-y: scroll;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .offerdiv{
+                width: 250px;
+                height: 270px;
+                background-color: #99ccff;
+                margin: 10px;
+                border-radius: 20px;
+                float: left;
+                padding: 20px;
+                padding-right: 20px;
+                position: relative;
+                font-weight: 700;
+                display: none;
+                transition: all 0.5s ease;
+            }
+            .show{
+                display: block;
+            }
+            .applybutton{
+                height: 40px;
+                width: 100px;
+                background-color: #3399ff;
+                border-radius: 50px;
+                left: 50%;
+                position: absolute;
+                -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+                border: 0px;
+                margin-top: 10px;
+                font-size: 18px;
+            }
+            .cancelbutton{
+                height: 40px;
+                width: 200px;
+                background-color: #3399ff;
+                border-radius: 50px;
+                left: 50%;
+                position: absolute;
+                -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+                border: 0px;
+                margin-top: 10px;
+                font-size: 18px;
+
+            }
+            .applybutton:hover{
+                background-color: #0073e6;
+            }
+            b{
+                font-weight: 800;
+            }
+        </style>
+
+        <script type="text/javascript">
+            function filterSelection(c)
+            {
+                var x, i;
+                x=document.getElementsByClassName("offerdiv");
+                for(i=0;i<x.length;i++)
+                {
+                    var clname=removeshow(x[i].className);
+                    x[i].className=clname;
+                }
+                if(c=="all")
+                {
+                    for(var i=0;i<x.length;i++)
+                        x[i].className+=" "+"show";
+                    return;    
+                }
+                var y=document.getElementsByClassName(c);
+                for(i=0;i<y.length;i++)
+                {
+                    y[i].className+=" "+"show";
+                }
+            }
+            function removeshow(classes)
+            {
+                var vals=classes.split(" ");
+                for(var i=0;i<vals.length;i++)
+                {
+                    if(vals[i]=="show")
+                    {
+                        vals.splice(i,1);
+                    }
+                }
+                var changedclass=vals.join(" ");
+                return changedclass;
+            }
+            var flag=0;
+            function changestyle(applybutton)
+            {
+                if(flag==0)
+                {
+                    applybutton.innerHTML="Applied";
+                    applybutton.style.backgroundColor="#00c914";
+                    flag=1;
+                    return;
+                }
+                else{
+                    applybutton.innerHTML="Apply";
+                    applybutton.style.backgroundColor="#3399ff";
+                    flag=0;
+                    return;
+                }
+            }
+        </script>
+    </script>
+    <link rel="stylesheet" href="/JS/navbar.css">
+    <script src="/JS/navbar.js"></script>
+    </head>
+    <body style="background-color: #cce6ff;">
+        <div class="top" >
+            <a href="https://www.bmsce.ac.in/"><img src="/Images/bmscelogo2.png" id="bmslogo"/></a>
+            <div class="userDetails">
+                <img class="userImg" src="/UserImages/Students/<%=userEmail%>.jpg"/>
+                <%=userEmail%><br>
+                <%=userUsn%>
+                <form class="logoutform" action="/logout?_method=DELETE" method="POST">
+                    <button name="submit" 
+                    value="logout" type="submit" class="logoutButton">Logout</button>
+                </form> 
+            </div>
+            <h1 style="text-align: center;"><b style="font-weight: 1000;"></b>B.M.S College of Engineering</b></h1>
+            <h1 style="text-align: center;"><b style="font-weight: 1000;"></b>Student Dashboard</b></h1>
+            
+        </div>
+        <div id="nav-tag"></div>
+        

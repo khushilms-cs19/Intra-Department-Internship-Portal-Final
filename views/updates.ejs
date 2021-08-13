@@ -1,0 +1,26 @@
+<%- include("top")-%>
+<div class="updatecolumn">
+  <br />
+  <h3
+    style="
+      text-align: center;
+      background-color: #3399ff;
+      border-radius: 5px;
+      margin: 10px;
+      font-weight: 700;
+      width: 90%;
+      margin-bottom: 1rem;
+    "
+  >
+    Updates
+  </h3>
+  <br />
+  <ul class="updates">
+      <% for(let i=0;i<updatesList.length;i++){%>
+        <li><%=updatesList[i]%></li>
+        <br/>
+      <%}%>
+  </ul>
+  <br />
+</div>
+<%- include("bottom")-%>

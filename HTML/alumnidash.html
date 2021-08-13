@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Dashboard</title>
+    <link rel="stylesheet" href="/CSS/alumnidash.css">
+    <link rel="stylesheet" href="/CSS/dash.css">
+    <!-- JS function that gets image from user and displays it on the page -->
+    <script type="text/javascript">
+        var myfunc = function(){
+            var job = document.getElementById('jobtitle').value;
+            var field = document.getElementById('requirements').value;
+            var mincgpa = document.getElementById('mincgpa').value;
+            var wh = document.getElementById('wh').value;
+            var stipend = document.getElementById('workplace').value;
+            
+            //RegEx
+            var numbersOnly = new RegExp('^[0-9]+$');
+
+
+            if(isNaN(mincgpa) || mincgpa === "" || !numbersOnly.test(stipend)){
+                alert('Enter valid CGPA');
+                return false;
+            }
+            if(isNaN(wh) || wh === "" || !numbersOnly.test(stipend)){
+                alert('Enter valid working hours');
+                return false;
+            }
+            if(isNaN(stipend)|| stipend === "" || !numbersOnly.test(stipend)){
+                alert('Enter valid stipend');
+                return false;
+            }
+            alert('Form has been submitted');
+            location.reload();
+            return true;
+        }
+        var loadFile = function(e) {
+            var image = document.getElementById('photo'); // getting image tag with id 'photo'
+            image.src = URL.createObjectURL(e.target.files[0]); // setting src of the image to the one selected by user
+            // e is an event object, e.target contains information of the submitted form, files[0] is the file selected by user
+        };
+    </script>
+    <div class="top" style="background-color: #3399ff;">
+        <a href="https://www.bmsce.ac.in/"><img src="/Images/bmscelogo2.png" id="bmslogo"/></a>
+        <div class="userDetails">
+                <img class="userImg" src="/UserImages/<%=studentLoggedIn%>.jpeg"/>
+                <%=userEmail%><br>
+                <%=userUsn%>
+                <form class="logoutform" action="/logout?_method=DELETE" method="POST">
+                    <button name="submit" 
+                    value="logout" type="submit" class="logoutButton">Logout</button>
+                </form> 
+            </div>
+        <h1 style="text-align: center;">B.M.S College of Engineering</h1>
+        <h1 style="text-align: center;">Alumni Dashboard</h1>
+    </div>
+        <link rel="stylesheet" href="/JS/navbar.css">
+        <script src="/JS/navbar.js"></script>
+        <div id="nav-tag"></div>
+</head>
+<body>
+    
+    <div class="menu">
+        <p>Previous Listings</p>
+        <ul>
+            <li>Node JS Developer</li>
+            <li>Angular developer</li>
+            <li>React Developer</li>
+            <li>Flutter Developer</li>
+            <li>Xamarin Developer</li>
+        </ul>
+    </div>
+    <div class="main">
+        <p>Add a new job listing</p>
+        <img class="photo" id="photo"></img>
+        
+        <div class="form-container">
+            <form method="POST" action="/alumni-dash">
+                <span>
+                    <label for="jobtitle">Name</label>
+                    <input name="company" type="text" class="job" id="jobtitle">
+                </span>
+                <span>
+                    <label for="requirments">Field</label>
+                    <input name="field" type="text" class="req" id="requirements">
+                </span>
+                <span>
+                    <label for="workplace">Stipend</label>
+                    <input name="stipend" type="text" class="addr" id="workplace">
+                </span>
+                <span>
+                    <label for="wh">Working Hours</label>
+                    <input name="work_hours" type="text" class="Wh" id="wh">
+
+                </span>
+                <span>
+                    <label for="mincgpa">Minimum CGPA</label>
+                    <input name="mincgpa" type="text" class="mincgpa" id="mincgpa">
+                </span>
+                <span>
+                    <label for="location">Location</label>
+                    <input name="location" type="text" class="location" id="location">
+                </span>
+                <input name="submit" type="submit" value="Submit" onclick="myfunc()">
+            </form>
+            
+            <div>
+                <!-- calling loadFile once user selects a file -->
+                <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" style="display: none;"> 
+                <label for="file" style="cursor: pointer;" id="fileLabel">Upload Image</label>
+            </div>
+        </div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Alumni Login</title>
+    <script type="text/javascript">
+      function validate() {
+        var emailValidate =
+          LoginPage.emailid.value.search(/[a-zA-Z]@gmail.com/);
+        if (emailValidate == -1) {
+          alert("Please Enter a valid email id.");
+          document.LoginPage.emailid.focus();
+          return false;
+        }
+        var passwordValidate = LoginPage.password.value;
+        if (passwordValidate == "") {
+          alert("Please enter your password");
+          document.LoginPage.password.focus();
+          return false;
+        }
+      }
+    </script>
+    <style>
+      .alumnilogin {
+        background-color: #99ccff;
+        margin-left: 40%;
+        margin-right: 30%;
+        margin-top: 5vh;
+        width: 300px;
+        height: 300px;
+        padding: 20px;
+        border-radius: 20px;
+      }
+      .textbox {
+        margin-left: 25px;
+        margin-top: 20px;
+        border-radius: 20px;
+        width: 230px;
+        height: 40px;
+        padding-left: 20px;
+        border: 0px;
+      }
+      .loginbutton {
+        background-color: #3399ff;
+        padding: 8px;
+        color: black;
+        text-align: center;
+        border-radius: 18px;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 20px;
+        margin-left: 95px;
+        width: 100px;
+      }
+      .loginbutton:hover {
+        background-color: #0080ff;
+      }
+      #errorBox{
+        color: red;
+        text-align: center;
+        display: none;
+      }
+    </style>
+    <link rel="stylesheet" href="/JS/navbar.css" />
+    <script src="/JS/navbar.js"></script>
+  </head>
+  <body style="background-color: #cce6ff">
+    <div class="top" style="background-color: #3399ff">
+      <a href="https://www.bmsce.ac.in/"
+        ><img src="/Images/bmscelogo2.png" id="bmslogo"
+      /></a>
+      <h1 style="text-align: center">B.M.S College of Engineering</h1>
+      <h1 style="text-align: center">Alumni Login</h1>
+    </div>
+    <div id="nav-tag"></div>
+    <form
+      name="LoginPage"
+      class="alumnilogin"
+    >
+      <img
+        src="/Images/userlogo.jpg"
+        style="width: 100px; height: 100px; padding-left: 100px"
+      />
+      <br />
+      <input
+        class="textbox"
+        type="text"
+        name="emailid"
+        id="email"
+        placeholder="example@gmail.com"
+      />
+      <br />
+      <input
+        class="textbox"
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password"
+      />
+      <button class="loginbutton" name="submit" type="button" id="submit">Login</button>
+      <div style="line-height: 1.5">
+      </div>
+      <p id="errorBox"></p>
+    </form>
+    <script type="text/javascript">
+      var email = document.getElementById('email')
+      var password = document.getElementById('password')
+
+      var headers = new Headers()
+      headers.append('Content-Type', 'application/json')
+
+      document.getElementById('submit').addEventListener('click', (e) => {
+        e.preventDefault()
+        fetch('http://localhost:3000/alumni-login',{
+          method: 'POST',
+          headers,
+          credentials: 'include',
+          body: JSON.stringify({
+            email: email.value,
+            password: password.value
+          })
+        }).then(async (res) => {
+          newRes = await res.json()
+          console.log(newRes)
+          if(newRes.status){
+            window.location = newRes.redirect
+          }else{
+            var errorValue = document.getElementById('errorBox')
+            errorValue.innerHTML = newRes.errors[0].msg
+            errorValue.style.display = 'block'
+            setTimeout(() => {
+              errorValue.style.display = 'none'
+            },2000)
+          }
+          
+        }).catch(e => console.log(e))
+      })
+    </script>
+  </body>
+</html>

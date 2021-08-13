@@ -1,0 +1,97 @@
+<%- include("topStudentDash") -%>
+<div class="FilterOption" >
+    <div class="filterhead" >
+        <p style="text-align:center;">Filter</p>
+    </div>
+    <br>
+    <select class="filterparam" name="location" onchange="filterSelection(this.value)">
+        <option value="all">Location</option>
+        <%for(let i=0;i<distinctLocations.length;i++){%>
+            <option value="<%=distinctLocations[i]%>"><%=distinctLocations[i]%></option>
+        <%}%>
+        <!-- <option value="Bangalore">Bangalore</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Pune">Pune</option> -->
+    </select>
+    <br>
+    <select class="filterparam" name="min-cgpa" onchange="filterSelection(this.value)">
+        <option value="all">Min. CGPA</option>
+        <%for(let i=0;i<distinctCgpa.length;i++){%>
+            <option value="<%=distinctCgpa[i]%>"><%=distinctCgpa[i]%></option>
+        <%}%>
+        <!-- <option value="6">6.0</option>
+        <option value="7">7.0</option>
+        <option value="8">8.0</option>
+        <option value="9">9.0</option> -->
+    </select>
+    <br>
+    <select class="filterparam" name="field" onchange="filterSelection(this.value)">
+        <option value="all">Field</option>
+        <%for(let i=0;i<distinctFields.length;i++){%>
+            <option value="<%=distinctFields[i]%>"><%=distinctFields[i]%></option>
+        <%}%>
+        <!-- <option value="Web">Web Development</option>
+        <option value="Data Analysis">Data Analysis</option>
+        <option value="Mobile">Mobile App. Development</option>
+        <option value="Network">Network Security</option>
+        <option value="AI">AI ML</option>
+        <option value="Cloud">Cloud</option> -->
+    </select>
+    <br>
+    <select class="filterparam" name="hoursperweek" onchange="filterSelection(this.value)">
+        <option value="all">Working Hours</option>
+        <%for(let i=0;i<distinctWhours.length;i++){%>
+            <option value="<%=distinctWhours[i]%>"><%=distinctWhours[i]%></option>
+        <%}%>
+        <!-- <option value="35">35 hr/wk</option>
+        <option value="25">25 hr/wk</option>
+        <option value="15">15 hr/wk</option> -->
+    </select>
+    <br>
+    <select class="filterparam" name="stipend" onchange="filterSelection(this.value)">
+        <option value="all">Stipend</option>
+        <%for(let i=0;i<distinctStipends.length;i++){%>
+            <option value="<%=distinctStipends[i]%>"><%=distinctStipends[i]%></option>
+        <%}%>
+        <!-- <option value="20000">Rs.20,000</option>
+        <option value="35000">Rs.35,000</option>
+        <option value="50000">Rs.50,000</option>
+        <option value="75000">Rs.75,000</option> -->
+    </select>
+    <br>
+    <button class="refresh" onclick="filterSelection('all')">Show All</button>
+</div> 
+<div class="allofferdiv">
+    <%for(let i=0;i<offersList.names.length;i++){%>
+        <div class="offerdiv <%=offersList.fields[i]%> <%=offersList.stipends[i]%> <%=offersList.whours[i]%> <%=offersList.mincgpa[i]%> <%=offersList.locations[i]%> show">
+            <img src="/Images/Companies/<%=offersList.names[i]%>.jpg" style="height: 60px; margin-left: auto; margin-right: auto;display: block; border-radius: 10px"> 
+            <p>
+                <b>Name:</b> <%=offersList.names[i]%><br>
+                <b>Field:</b> <%=offersList.fields[i]%>
+                <br>
+                <b>Stipend:</b> <%=offersList.stipends[i]%>
+                <br>
+                <b>Working Hours:</b><%=offersList.whours[i]%> 
+                <br>
+                <b>Min. CGPA:</b> <%=offersList.mincgpa[i]%>
+                <br>
+                <b>Location:</b> <%=offersList.locations[i]%>
+                <br>
+                <%if(offersList.appliedOfferIds.includes(offersList.offerIds[i])){%>
+                    <form method="POST" action="/student-dash">
+                        <button class="cancelbutton" style="background-color: lawngreen;" name="submit" type="submit" value="cancel:<%=offersList.offerIds[i]%>" onclick="location.reload()">Cancel Application</button>
+                    </form>
+                <%}else{%>
+                    <form method="POST" action="/student-dash">
+                    <button class="applybutton" onclick="changestyle(this)" name="submit" type="submit" value="<%=offersList.offerIds[i]%>">Apply</button>
+                    </form>
+                <%}%>
+
+            </p>
+    
+        </div>
+    <%}%>
+</div>
+</body>
+</html>
+

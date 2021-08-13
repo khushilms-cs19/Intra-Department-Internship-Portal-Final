@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Student Dashboard</title>
+        <script type="text/javascript">
+        </script>
+        <style>
+            *{
+                font-family:"Arial";
+                font-weight: 700;
+            }
+            body::-webkit-scrollbar{
+                display: hidden;
+            }
+            .FilterOption{
+                margin-top: 10px;
+                width: 250px;
+                height: 73vh;
+                float: left;
+                background-color: #99ccff;
+                border-radius: 20px;
+                margin-right: 2vw;
+                margin-left: 10px;
+            }
+            .filterhead{
+                width: 100%;
+                height: 30px;
+                border-radius: 20px;
+                background-color:#3399ff;
+                font-size: 25px;
+                margin: 0px;
+            }
+
+            .filterparam{
+                height: 30px;
+                width: 200px;
+                margin-left: 25px;
+                margin-right: 25px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                background-color: #e6f2ff;
+                border: 0px;
+                border-radius: 5px;
+                padding-left: 20px;
+            }
+            .refresh{
+                height: 40px;
+                width: 100px;
+                background-color: #3399ff;
+                border-radius: 50px;
+                border: 0px;
+                font-size: 18px;
+                margin-left: 30%;
+            }
+            .refresh:hover{
+                background-color: #0073e6;
+            }
+            .allofferdiv{
+                height: 75vh;
+                overflow-y: auto;
+                line-height: 1.4;
+            }
+            .offerdiv{
+                width: 250px;
+                height: 270px;
+                background-color: #99ccff;
+                margin: 10px;
+                border-radius: 20px;
+                float: left;
+                padding: 20px;
+                padding-right: 20px;
+                position: relative;
+                font-weight: 700;
+                display: none;
+                transition: all 0.5s ease;
+            }
+            .show{
+                display: block;
+            }
+            .applybutton{
+                height: 40px;
+                width: 100px;
+                background-color: #3399ff;
+                border-radius: 50px;
+                left: 50%;
+                position: absolute;
+                -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+                border: 0px;
+                margin-top: 10px;
+                font-size: 18px;
+            }
+            .applybutton:hover{
+                background-color: #0073e6;
+            }
+            b{
+                font-weight: 800;
+            }
+        </style>
+
+        <script type="text/javascript">
+            function filterSelection(c)
+            {
+                var x, i;
+                x=document.getElementsByClassName("offerdiv");
+                for(i=0;i<x.length;i++)
+                {
+                    var clname=removeshow(x[i].className);
+                    x[i].className=clname;
+                }
+                if(c=="all")
+                {
+                    for(var i=0;i<x.length;i++)
+                        x[i].className+=" "+"show";
+                    return;    
+                }
+                var y=document.getElementsByClassName(c);
+                for(i=0;i<y.length;i++)
+                {
+                    y[i].className+=" "+"show";
+                }
+            }
+            function removeshow(classes)
+            {
+                var vals=classes.split(" ");
+                for(var i=0;i<vals.length;i++)
+                {
+                    if(vals[i]=="show")
+                    {
+                        vals.splice(i,1);
+                    }
+                }
+                var changedclass=vals.join(" ");
+                return changedclass;
+            }
+            var flag=0;
+            function changestyle(applybutton)
+            {
+                if(flag==0)
+                {
+                    applybutton.innerHTML="Applied";
+                    applybutton.style.backgroundColor="#00c914";
+                    flag=1;
+                    return;
+                }
+                else{
+                    applybutton.innerHTML="Apply";
+                    applybutton.style.backgroundColor="#3399ff";
+                    flag=0;
+                    return;
+                }
+            }
+        </script>
+    </script>
+    <link rel="stylesheet" href="/JS/navbar.css">
+    <script src="/JS/navbar.js"></script>
+    </head>
+    <body style="background-color: #cce6ff;">
+        <div class="top" >
+            <a href="https://www.bmsce.ac.in/"><img src="/Images/bmscelogo2.png" id="bmslogo"/></a>
+            <h1 style="text-align: center;"><b style="font-weight: 1000;"></b>B.M.S College of Engineering</b></h1>
+            <h1 style="text-align: center;"><b style="font-weight: 1000;"></b>Student Dashboard</b></h1>
+        </div>
+        <div id="nav-tag"></div>
+        <div class="FilterOption" >
+            <div class="filterhead" >
+                <p style="text-align:center;">Filter</p>
+            </div>
+            <br>
+            <select class="filterparam" name="location" onchange="filterSelection(this.value)">
+                <option value="all">Location</option>
+                <option value="bangalore">Bangalore</option>
+                <option value="hyderabad">Hyderabad</option>
+                <option value="pune">Pune</option>
+            </select>
+            <br>
+            <select class="filterparam" name="min-cgpa" onchange="filterSelection(this.value)">
+                <option value="all">Min. CGPA</option>
+                <option value="6">6.0</option>
+                <option value="7">7.0</option>
+                <option value="8">8.0</option>
+                <option value="9">9.0</option>
+            </select>
+            <br>
+            <select class="filterparam" name="field" onchange="filterSelection(this.value)">
+                <option value="all">Field</option>
+                <option value="webdev">Web Development</option>
+                <option value="dataanalyst">Data Analysis</option>
+                <option value="mobileapp">Mobile App. Development</option>
+                <option value="network">Network Security</option>
+                <option value="aiml">AI ML</option>
+                <option value="cloud">Cloud</option>
+            </select>
+            <br>
+            <select class="filterparam" name="hoursperweek" onchange="filterSelection(this.value)">
+                <option value="all">Working Hours</option>
+                <option value="35">35 hr/wk</option>
+                <option value="25">25 hr/wk</option>
+                <option value="15">15 hr/wk</option>
+            </select>
+            <br>
+            <select class="filterparam" name="stipend" onchange="filterSelection(this.value)">
+                <option value="all">Stipend</option>
+                <option value="20000">Rs.20,000</option>
+                <option value="35000">Rs.35,000</option>
+                <option value="50000">Rs.50,000</option>
+                <option value="75000">Rs.75,000</option>
+            </select>
+            <br>
+            <button class="refresh" onclick="filterSelection('all')">Show All</button>
+        </div>
+        <div class="allofferdiv">
+            <div class="offerdiv webdev 20000 25 6 bangalore show">
+                <img src="/Images/accenture.png" style="height: 60px; margin-left: auto; margin-right: auto;display: block; border-radius: 10px"> 
+                <p>
+                    <b>Name:</b> Accenture <br>
+                    <b>Field:</b> Web Development <br>
+                    <b>Stipend:</b> Rs.20,000<br>
+                    <b>Working Hours:</b> 25 hr/wk <br>
+                    <b>Min. CGPA:</b> 6.0<br>
+                    <b>Location:</b> Bangalore<br>
+                    <button class="applybutton" onclick="changestyle(this)">Apply</button>
+                </p>
+
+            </div>
+            <div class="offerdiv aiml 35000 35 9 pune show">
+                <img src="/Images/amazon.jpg" style="height: 60px; margin-left: auto; margin-right: auto;display: block; border-radius: 10px"> 
+                <p>
+                    <b>Name:</b> Amazon<br>
+                    <b>Field:</b> AI ML<br>
+                    <b>Stipend:</b> Rs.35,000<br>
+                    <b>Working Hours:</b> 35 hr/wk <br>
+                    <b>Min. CGPA:</b> 9.0<br>
+                    <b>Location:</b> Pune<br>
+                    <button class="applybutton" onclick="changestyle(this)">Apply</button>
+                </p>
+
+            </div>
+            <div class="offerdiv webdev 20000 25 7 hyderabad show">
+                <img src="/Images/facebook.png" style="height: 60px; margin-left: auto; margin-right: auto;display: block; border-radius: 10px"> 
+                <p>
+                    <b>Name:</b> Facebook<br>
+                    <b>Field:</b> Web Development<br>
+                    <b>Stipend:</b> Rs.20,000<br>
+                    <b>Working Hours:</b> 25 hr/wk <br>
+                    <b>Min. CGPA:</b> 7.0<br>
+                    <b>Location:</b> Hyderabad<br>
+                    <button class="applybutton" onclick="changestyle(this)">Apply</button>
+                </p>
+
+            </div>
+            <div class="offerdiv cloud 20000 15 8 bangalore show">
+                <img src="/Images/facebook.png" style="height: 60px; margin-left: auto; margin-right: auto;display: block; border-radius: 10px"> 
+                <p>
+                    <b>Name:</b> Facebook<br>
+                    <b>Field:</b> Cloud<br>
+                    <b>Stipend:</b> Rs.20,000<br>
+                    <b>Working Hours:</b> 15 hr/wk <br>
+                    <b>Min. CGPA:</b> 8.0<br>
+                    <b>Location:</b> Bangalore<br>
+                    <button class="applybutton" onclick="changestyle(this)">Apply</button>
+                </p>
+
+            </div>
+            <div class="offerdiv dataanalyst 50000 35 8 pune show">
+                <img src="/Images/akamai.png" style="height: 60px; margin-left: auto; margin-right: auto;display: block; border-radius: 10px"> 
+                <p>
+                    <b>Name:</b> Akamai<br>
+                    <b>Field:</b> Data Analysis<br>
+                    <b>Stipend:</b> Rs.50,000<br>
+                    <b>Working Hours:</b> 35 hr/wk <br>
+                    <b>Min. CGPA:</b> 8.0<br>
+                    <b>Location:</b> Pune<br>
+                    <button class="applybutton" onclick="changestyle(this)">Apply</button>
+                </p>
+
+            </div>
+            <div class="offerdiv network 20000 15 6 bangalore show">
+                <img src="/Images/atlassian.jpg" style="height: 60px; margin-left: auto; margin-right: auto;display: block; border-radius: 10px"> 
+                <p>
+                    <b>Name:</b> Atlassian<br>
+                    <b>Field:</b> Network Security<br>
+                    <b>Stipend:</b> Rs.20,000<br>
+                    <b>Working Hours:</b> 15 hr/wk <br>
+                    <b>Min. CGPA:</b> 6.0<br>
+                    <b>Location:</b> Bangalore<br>
+                    <button class="applybutton" onclick="changestyle(this)">Apply</button>
+                </p>
+
+            </div>
+            <div class="offerdiv cloud 50000 25 7 hyderabad show">
+                <img src="/Images/netflix.jpg" style="height: 60px; margin-left: auto; margin-right: auto;display: block; border-radius: 10px"> 
+                <p>
+                    <b>Name:</b> Netflix<br>
+                    <b>Field:</b> Cloud<br>
+                    <b>Stipend:</b> Rs.50,000<br>
+                    <b>Working Hours:</b> 25 hr/wk <br>
+                    <b>Min. CGPA:</b> 7.0<br>
+                    <b>Location:</b> Hyderabad<br>
+                    <button class="applybutton" onclick="changestyle(this)">Apply</button>
+                </p>
+
+            </div>
+            <div class="offerdiv network 50000 35 9 bangalore show">
+                <img src="/Images/dundermifflin.jpg" style="height: 60px; margin-left: auto; margin-right: auto;display: block; border-radius: 10px"> 
+                <p>
+                    <b>Name:</b> Dundermifflin<br>
+                    <b>Field:</b> Network Security<br>
+                    <b>Stipend:</b> Rs.50,000<br>
+                    <b>Working Hours:</b> 35 hr/wk <br>
+                    <b>Min. CGPA:</b> 9.0<br>
+                    <b>Location:</b> Bangalore<br>
+                    <button class="applybutton" onclick="changestyle(this)">Apply</button>
+                </p>
+
+            </div>
+            <div class="offerdiv mobileapp 75000 35 9 pune show">
+                <img src="/Images/sabre.jpg" style="height: 60px; margin-left: auto; margin-right: auto;display: block; border-radius: 10px"> 
+                <p>
+                    <b>Name:</b> Sabre<br>
+                    <b>Field:</b> Mobile App. Development<br>
+                    <b>Stipend:</b> Rs.75,000<br>
+                    <b>Working Hours:</b> 35 hr/wk <br>
+                    <b>Min. CGPA:</b> 9.0<br>
+                    <b>Location:</b> Pune<br>
+                    <button class="applybutton" onclick="changestyle(this)">Apply</button>
+                </p>
+
+            </div>
+
+            <div class="offerdiv aiml 50000 35 9 hyderabad show">
+                <img src="/Images/tcs.png" style="height: 60px; margin-left: auto; margin-right: auto;display: block; border-radius: 10px"> 
+                <p>
+                    <b>Name:</b> TCS<br>
+                    <b>Field:</b> AI ML<br>
+                    <b>Stipend:</b> Rs.50,000<br>
+                    <b>Working Hours:</b> 35 hr/wk <br>
+                    <b>Min. CGPA:</b> 9.0<br>
+                    <b>Location:</b> Hyderabad<br>
+                    <button class="applybutton" onclick="changestyle(this)">Apply</button>
+                </p>
+
+            </div>
+            <div class="offerdiv webdev 35000 25 7 bangalore show">
+                <img src="/Images/accenture.png" style="height: 60px; margin-left: auto; margin-right: auto;display: block; border-radius: 10px"> 
+                <p>
+                    <b>Name:</b> Accenture<br>
+                    <b>Field:</b> Web Development<br>
+                    <b>Stipend:</b> Rs.35,000<br>
+                    <b>Working Hours:</b> 25 hr/wk <br>
+                    <b>Min. CGPA:</b> 7.0<br>
+                    <b>Location:</b> Bangalore<br>
+                    <button class="applybutton" onclick="changestyle(this)">Apply</button>
+                </p>
+            </div>
+            <div class="offerdiv dataanalyst 35000 15 8 pune show">
+                <img src="/Images/mindtree.jpg" style="height: 60px; margin-left: auto; margin-right: auto;display: block; border-radius: 10px"> 
+                <p>
+                    <b>Name:</b> MindTree<br>
+                    <b>Field:</b> Data Analyst<br>
+                    <b>Stipend:</b> Rs.35,000<br>
+                    <b>Working Hours:</b> 15 hr/wk <br>
+                    <b>Min. CGPA:</b> 8.0<br>
+                    <b>Location:</b> Pune<br>
+                    <button class="applybutton" onclick="changestyle(this)">Apply</button>
+                </p>
+            </div>
+            <div class="offerdiv mobileapp 75000 35 9 hyderabad show">
+                <img src="/Images/google.jpg" style="height: 60px; margin-left: auto; margin-right: auto;display: block; border-radius: 10px"> 
+                <p>
+                    <b>Name:</b> Google<br>
+                    <b>Field:</b>Mobile App. Development<br>
+                    <b>Stipend:</b> Rs.75,000<br>
+                    <b>Working Hours:</b> 35 hr/wk <br>
+                    <b>Min. CGPA:</b> 9.0<br>
+                    <b>Location:</b> Hyderabad<br>
+                    <button class="applybutton" onclick="changestyle(this)">Apply</button>
+                </p>
+            </div>
+            <div class="offerdiv dataanalyst 50000 25 8 bangalore show">
+                <img src="/Images/tcs.png" style="height: 60px; margin-left: auto; margin-right: auto;display: block; border-radius: 10px"> 
+                <p>
+                    <b>Name:</b> TCS<br>
+                    <b>Field:</b> Data Analysis<br>
+                    <b>Stipend:</b> Rs.50,000<br>
+                    <b>Working Hours:</b> 25 hr/wk <br>
+                    <b>Min. CGPA:</b> 8.0<br>
+                    <b>Location:</b> Bangalore<br>
+                    <button class="applybutton" onclick="changestyle(this)">Apply</button>
+                </p>
+            </div>
+            <div class="offerdiv network 35000 15 6 pune show">
+                <img src="/Images/mindtree.jpg" style="height: 60px; margin-left: auto; margin-right: auto;display: block; border-radius: 10px"> 
+                <p>
+                    <b>Name:</b> MindTree<br>
+                    <b>Field:</b> Network Security<br>
+                    <b>Stipend:</b> Rs.35,000<br>
+                    <b>Working Hours:</b> 15 hr/wk <br>
+                    <b>Min. CGPA:</b> 6.0<br>
+                    <b>Location:</b> Pune<br>
+                    <button class="applybutton" onclick="changestyle(this)">Apply</button>
+                </p>
+            </div>
+            <div class="offerdiv cloud 75000 35 9 hyderabad show">
+                <img src="/Images/amazon.jpg" style="height: 60px; margin-left: auto; margin-right: auto;display: block; border-radius: 10px"> 
+                <p>
+                    <b>Name:</b> Amazon<br>
+                    <b>Field:</b> Cloud<br>
+                    <b>Stipend:</b> Rs.75,000<br>
+                    <b>Working Hours:</b> 35 hr/wk <br>
+                    <b>Min. CGPA:</b> 9.0<br>
+                    <b>Location:</b> Hyderabad<br>
+                    <button class="applybutton" onclick="changestyle(this)">Apply</button>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

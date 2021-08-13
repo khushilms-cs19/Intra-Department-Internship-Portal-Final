@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../public/JS/navbar.css" />
+    <script src="../public/JS/navbar.js"></script>
+    <link rel="stylesheet" href="../public/CSS/dash.css" />
+    <link rel="stylesheet" href="../public/CSS/admindash.css" />
+    <!-- loading google charts CDN below-->
+    <script
+      src="https://www.gstatic.com/charts/loader.js"
+      type="text/javascript"
+    ></script>
+  </head>
+  <body>
+    <div class="top" style="background-color: #3399ff">
+      <a href="https://www.bmsce.ac.in/"
+        ><img src="../public/Images/bmscelogo2.png" id="bmslogo"
+      /></a>
+      <h1 style="text-align: center">B.M.S College of Engineering</h1>
+      <h1 style="text-align: center">Admin Dashboard</h1>
+    </div>
+    <div id="nav-tag"></div>
+    <div class="menu">
+      <p>Filter</p>
+      <div class="buttonContainer">
+        <!-- Calling setChart when a button is clicked -->
+        <input type="button" id="b1" value="Type" onclick="setChart(0)" />
+        <input type="button" id="b2" value="Stipend" onclick="setChart(1)" />
+        <button class="show-modal">Add an Update</button>
+      </div>
+    </div>
+    <div class="main">
+      <p>Data</p>
+      <!-- chartContainer div is empty as chart is renedered from JS -->
+      <div id="chart">
+        <div id="chartContainer"></div>
+      </div>
+    </div>
+    <div class="updateModal hidden">
+      <button class="close-modal">&times;</button>
+      <h1>Add an Update❗</h1>
+      <form action="/post-update" method="POST">
+        <input class="updateName" name="UpdateName" placeholder="Name of the Update"/>
+        <input class="updateDesc" name="UpdateDescription" placeholder="Update Description"/>
+        <button name="submit" class="addupdate-btn" type="submit">Add</button>
+      </form>
+    </div>
+    <div class="overlay hidden"></div>
+    <script src="../public/JS/admindash.js" type="text/javascript"></script>
+  </body>
+</html>
